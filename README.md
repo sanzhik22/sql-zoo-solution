@@ -884,6 +884,46 @@ values
 	('40001011','SLY07102',99);
 ```
 
+## [2015 UK General Election using](https://sqlzoo.net/wiki/2015_UK_General_Election_using_mysql)
 
+```SQL
+--Creating table ge
+create table public.ge(
+	ons_id VARCHAR(10),
+	ons_region_id VARCHAR(10),
+	constituency_name VARCHAR(50),
+	county_name VARCHAR(50),
+	region_name VARCHAR(50),
+	country_name VARCHAR(50),
+	constituency_type VARCHAR(10),
+	party_name VARCHAR(50),
+	party_abbreviation VARCHAR(50),
+	firstname VARCHAR(50),
+	surname VARCHAR(50),
+	gender VARCHAR(6),
+	sitting_mp VARCHAR(3),
+	former_mp VARCHAR(3),
+	votes INT,
+	share FLOAT,
+	change VARCHAR(20),
+	PRIMARY KEY(ons_id,firstname,surname)
+);
+```
+To solve this problem i used postgresql database
+
+To load data to database i used Pentaho Data integration tool in this repository i added file Load-csv-postgres.ktr
+table.csv is data added 
+
+To launch ktr file in PDI adjust conncetion
+```
+<connection>
+    <server>******</server> - put server host
+    <type>POSTGRESQL</type>
+    <access>Native</access>
+    <database>*****</database> - database name
+    <port>****</port>  - put port 
+    <username>****</username> - put username
+    <password>*******</password> - put password
+```
 
 
