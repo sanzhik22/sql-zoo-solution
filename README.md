@@ -819,10 +819,70 @@ FROM route a JOIN route b ON
   JOIN stops stopb ON (b.stop=stopb.id)
 WHERE stopb.name = 'Lochend') as bus2
 ON bus1.stop2 = bus2.stop2
-
 ```
 
+## [11 Tutorial Student Records](https://sqlzoo.net/wiki/DDL_Student_Records)
 
+![](https://hackmd.io/_uploads/rklKWQdOh.png)
+
+My script:
+```SQL
+--CREATE student
+create table test.student (
+	matric_no char(8) not null,
+	first_name varchar(50),
+	last_name varchar(50),
+	date_of_birth date
+);
+
+--Add some students to the database
+insert into test.student values('40001010','Daniel', 'Radcliffe', '1989-07-23')
+insert into test.student values('40001011', 'Emma', 'Watson', '1990-04-15');
+insert into test.student values('40001012', 'Rupert', 'Grint', '1988-10-24');
+
+-- CREATE module
+create table test.module(
+	module_code char(8),
+	module_title varchar(50),
+	level int,
+	credits int not null 
+);
+
+-- Add some modules
+insert into 
+	test.module
+values 
+	('HUF07101', 'Herbology', 7),
+	('SLY07102', 'Defense Against the Dark Arts', 7),
+	('HUF08102', 'History of Magic', 8);
+
+--CREATE registration
+create table test.registration (
+	matric_no char(8),
+	matric_code char(8),
+	result decimal(4,1)
+);
+
+
+--Adjust keys
+ALTER TABLE test.module ADD CONSTRAINT module_pk PRIMARY KEY (module_code);
+ALTER TABLE test.student ADD CONSTRAINT student_pk PRIMARY KEY (matric_no);
+ALTER TABLE test.registration  ADD CONSTRAINT registration_pk PRIMARY KEY (matric_no);
+ALTER TABLE test.registration  ADD CONSTRAINT registration_pk PRIMARY KEY (matric_code);
+-- Foreign keys
+ALTER TABLE test.registration ADD CONSTRAINT registration_fk FOREIGN KEY (matric_code) REFERENCES test.module(module_code);
+ALTER TABLE test.registration ADD CONSTRAINT registration_fks FOREIGN KEY (matric_no) REFERENCES test.student(matric_no);
+
+--Add some data
+
+insert into 
+	test.registration 
+values
+	('40001010', 'SLY07102', 90),
+	('40001010','HUF07101',40),
+	('40001010','HUF08102',null),
+	('40001011','SLY07102',99);
+```
 
 
 
