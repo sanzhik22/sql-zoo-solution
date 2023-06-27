@@ -798,7 +798,7 @@ FROM route a JOIN route b ON
 WHERE a.company = 'LRT' AND stopb.name = 'Craiglockhart'
 ````
 
-10)Find the routes involving two buses that can go from Craiglockhart to Lochend.
+10) Find the routes involving two buses that can go from Craiglockhart to Lochend.
 Show the bus no. and company for the first bus, the name of the stop for the transfer,
 and the bus no. and company for the second bus.
 
